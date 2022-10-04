@@ -1,6 +1,6 @@
-describe('Board', function() {
+describe('Board', function () {
 
-  describe('Empty board', function() {
+  describe('Empty board', function () {
     var matrix = [
       [0, 0, 0, 0],
       [0, 0, 0, 0],
@@ -9,32 +9,32 @@ describe('Board', function() {
     ];
     var board = new Board(matrix);
 
-    it('should not find a row conflict', function() {
+    it('should not find a row conflict', function () {
       expect(board.hasAnyRowConflicts()).to.be.equal(false);
     });
 
-    it('should not find a col conflict', function() {
+    it('should not find a col conflict', function () {
       expect(board.hasAnyColConflicts()).to.be.equal(false);
     });
 
-    it('should not find a rooks conflict', function() {
+    it('should not find a rooks conflict', function () {
       expect(board.hasAnyRooksConflicts()).to.be.equal(false);
     });
 
-    it('should not find a majorDiagonal conflict', function() {
+    it('should not find a majorDiagonal conflict', function () {
       expect(board.hasAnyMajorDiagonalConflicts()).to.be.equal(false);
     });
 
-    it('should not find a minorDiagonal conflict', function() {
+    it('should not find a minorDiagonal conflict', function () {
       expect(board.hasAnyMinorDiagonalConflicts()).to.be.equal(false);
     });
 
-    it('should not find a queens conflict', function() {
+    it('should not find a queens conflict', function () {
       expect(board.hasAnyQueensConflicts()).to.be.equal(false);
     });
   });
 
-  describe('Board with row conflicts', function() {
+  describe('Board with row conflicts', function () {
     var matrix = [
       [0, 0, 0, 0],
       [1, 1, 0, 0],
@@ -42,33 +42,35 @@ describe('Board', function() {
       [0, 0, 0, 0]
     ];
     var board = new Board(matrix);
-
-    it('should find a row conflict', function() {
+    it('whether the row has conflict', function () {
+      expect(board.hasRowConflictAt(matrix[1])).to.be.equal(true);
+    });
+    it('should find a row conflict', function () {
       expect(board.hasAnyRowConflicts()).to.be.equal(true);
     });
 
-    it('should not find a col conflict', function() {
+    it('should not find a col conflict', function () {
       expect(board.hasAnyColConflicts()).to.be.equal(false);
     });
 
-    it('should find a rooks conflict', function() {
+    it('should find a rooks conflict', function () {
       expect(board.hasAnyRooksConflicts()).to.be.equal(true);
     });
 
-    it('should not find a majorDiagonal conflict', function() {
+    it('should not find a majorDiagonal conflict', function () {
       expect(board.hasAnyMajorDiagonalConflicts()).to.be.equal(false);
     });
 
-    it('should not find a minorDiagonal conflict', function() {
+    it('should not find a minorDiagonal conflict', function () {
       expect(board.hasAnyMinorDiagonalConflicts()).to.be.equal(false);
     });
 
-    it('should find a queens conflict', function() {
+    it('should find a queens conflict', function () {
       expect(board.hasAnyQueensConflicts()).to.be.equal(true);
     });
   });
 
-  describe('Board with col conflicts', function() {
+  describe('Board with col conflicts', function () {
     var matrix = [
       [1, 0, 0, 0],
       [0, 0, 0, 0],
@@ -77,32 +79,32 @@ describe('Board', function() {
     ];
     var board = new Board(matrix);
 
-    it('should not find a row conflict', function() {
+    it('should not find a row conflict', function () {
       expect(board.hasAnyRowConflicts()).to.be.equal(false);
     });
 
-    it('should find a col conflict', function() {
+    it('should find a col conflict', function () {
       expect(board.hasAnyColConflicts()).to.be.equal(true);
     });
 
-    it('should find a rooks conflict', function() {
+    it('should find a rooks conflict', function () {
       expect(board.hasAnyRooksConflicts()).to.be.equal(true);
     });
 
-    it('should not find a majorDiagonal conflict', function() {
+    it('should not find a majorDiagonal conflict', function () {
       expect(board.hasAnyMajorDiagonalConflicts()).to.be.equal(false);
     });
 
-    it('should not find a minorDiagonal conflict', function() {
+    it('should not find a minorDiagonal conflict', function () {
       expect(board.hasAnyMinorDiagonalConflicts()).to.be.equal(false);
     });
 
-    it('should find a queens conflict', function() {
+    it('should find a queens conflict', function () {
       expect(board.hasAnyQueensConflicts()).to.be.equal(true);
     });
   });
 
-  describe('Board with major diagonal conflicts', function() {
+  describe('Board with major diagonal conflicts', function () {
     var matrix = [
       [0, 1, 0, 0],
       [0, 0, 1, 0],
@@ -111,27 +113,27 @@ describe('Board', function() {
     ];
     var board = new Board(matrix);
 
-    it('should not find a row conflict', function() {
+    it('should not find a row conflict', function () {
       expect(board.hasAnyRowConflicts()).to.be.equal(false);
     });
 
-    it('should not find a col conflict', function() {
+    it('should not find a col conflict', function () {
       expect(board.hasAnyColConflicts()).to.be.equal(false);
     });
 
-    it('should not find a rooks conflict', function() {
+    it('should not find a rooks conflict', function () {
       expect(board.hasAnyRooksConflicts()).to.be.equal(false);
     });
 
-    it('should find a majorDiagonal conflict', function() {
+    it('should find a majorDiagonal conflict', function () {
       expect(board.hasAnyMajorDiagonalConflicts()).to.be.equal(true);
     });
 
-    it('should not find a minorDiagonal conflict', function() {
+    it('should not find a minorDiagonal conflict', function () {
       expect(board.hasAnyMinorDiagonalConflicts()).to.be.equal(false);
     });
 
-    it('should find a queens conflict', function() {
+    it('should find a queens conflict', function () {
       expect(board.hasAnyQueensConflicts()).to.be.equal(true);
     });
 
@@ -143,32 +145,32 @@ describe('Board', function() {
     ];
     board = new Board(matrix);
 
-    it('should not find a row conflict', function() {
+    it('should not find a row conflict', function () {
       expect(board.hasAnyRowConflicts()).to.be.equal(false);
     });
 
-    it('should not find a col conflict', function() {
+    it('should not find a col conflict', function () {
       expect(board.hasAnyColConflicts()).to.be.equal(false);
     });
 
-    it('should not find a rooks conflict', function() {
+    it('should not find a rooks conflict', function () {
       expect(board.hasAnyRooksConflicts()).to.be.equal(false);
     });
 
-    it('should find a majorDiagonal conflict', function() {
+    it('should find a majorDiagonal conflict', function () {
       expect(board.hasAnyMajorDiagonalConflicts()).to.be.equal(true);
     });
 
-    it('should not find a minorDiagonal conflict', function() {
+    it('should not find a minorDiagonal conflict', function () {
       expect(board.hasAnyMinorDiagonalConflicts()).to.be.equal(false);
     });
 
-    it('should find a queens conflict', function() {
+    it('should find a queens conflict', function () {
       expect(board.hasAnyQueensConflicts()).to.be.equal(true);
     });
   });
 
-  describe('Board with minor diagonal conflicts', function() {
+  describe('Board with minor diagonal conflicts', function () {
     var matrix = [
       [0, 0, 1, 0],
       [0, 0, 0, 0],
@@ -177,27 +179,27 @@ describe('Board', function() {
     ];
     var board = new Board(matrix);
 
-    it('should not find a row conflict', function() {
+    it('should not find a row conflict', function () {
       expect(board.hasAnyRowConflicts()).to.be.equal(false);
     });
 
-    it('should not find a col conflict', function() {
+    it('should not find a col conflict', function () {
       expect(board.hasAnyColConflicts()).to.be.equal(false);
     });
 
-    it('should not find a rooks conflict', function() {
+    it('should not find a rooks conflict', function () {
       expect(board.hasAnyRooksConflicts()).to.be.equal(false);
     });
 
-    it('should not find a majorDiagonal conflict', function() {
+    it('should not find a majorDiagonal conflict', function () {
       expect(board.hasAnyMajorDiagonalConflicts()).to.be.equal(false);
     });
 
-    it('should find a minorDiagonal conflict', function() {
+    it('should find a minorDiagonal conflict', function () {
       expect(board.hasAnyMinorDiagonalConflicts()).to.be.equal(true);
     });
 
-    it('should find a queens conflict', function() {
+    it('should find a queens conflict', function () {
       expect(board.hasAnyQueensConflicts()).to.be.equal(true);
     });
 
@@ -209,27 +211,27 @@ describe('Board', function() {
     ];
     board = new Board(matrix);
 
-    it('should not find a row conflict', function() {
+    it('should not find a row conflict', function () {
       expect(board.hasAnyRowConflicts()).to.be.equal(false);
     });
 
-    it('should not find a col conflict', function() {
+    it('should not find a col conflict', function () {
       expect(board.hasAnyColConflicts()).to.be.equal(false);
     });
 
-    it('should not find a rooks conflict', function() {
+    it('should not find a rooks conflict', function () {
       expect(board.hasAnyRooksConflicts()).to.be.equal(false);
     });
 
-    it('should not find a majorDiagonal conflict', function() {
+    it('should not find a majorDiagonal conflict', function () {
       expect(board.hasAnyMajorDiagonalConflicts()).to.be.equal(false);
     });
 
-    it('should find a minorDiagonal conflict', function() {
+    it('should find a minorDiagonal conflict', function () {
       expect(board.hasAnyMinorDiagonalConflicts()).to.be.equal(true);
     });
 
-    it('should find a queens conflict', function() {
+    it('should find a queens conflict', function () {
       expect(board.hasAnyQueensConflicts()).to.be.equal(true);
     });
   });
