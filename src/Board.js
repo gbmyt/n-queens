@@ -30,7 +30,7 @@
     },
 
     _getFirstRowColumnIndexForMajorDiagonalOn: function (rowIndex, colIndex) {
-      return colIndex - rowIndex;
+      return colIndex - rowIndex;//rowIndex =0===>colIndex =
     },
 
     _getFirstRowColumnIndexForMinorDiagonalOn: function (rowIndex, colIndex) {
@@ -131,7 +131,6 @@
       // Create count var
       var count = 0;
       var rows = this.rows();
-      console.log(colIndex);
 
       // Loop over result of rows method call
       for (var i = 0; i < rows.length; i++) {
@@ -176,8 +175,44 @@
     // --------------------------------------------------------------
     //
     // test if a specific major diagonal on this board contains a conflict
+    // O - boolean
+    // I - integer represent first index operate the matrix board
+    // C - no constrains
+    // E - start the index far to the right
     hasMajorDiagonalConflictAt: function (majorDiagonalColumnIndexAtFirstRow) {
+      //create count variable
+      var count = 0;
+      var rows = this.rows();
+      var dIndex = majorDiagonalColumnIndexAtFirstRow;
+      //loop over input argument
+      for (var i = 0; i < rows.length; i++) {
+        console.log(rows[i], dIndex);
+        console.log(this._isInBounds(rows[i], dIndex));
+
+        // Returning false, out of bounds
+        if (this._isInBounds(rows[i], dIndex)) {
+          //check start index which provided, if it =1==>increment count
+          //check second row at index+1 see confict
+          if (rows[i][dIndex] === 1) {
+            //if that is true count++
+            count++;
+            dIndex++;
+          } else {
+            throw new Error();
+          }
+          //repeat last step
+        }
+      }
+      if (count > 1) {
+        return true;
+      }
+
+      //if count >1 return true
+
+      // else return false
       return false; // fixme
+
+
     },
 
     // test if any major diagonals on this board contain conflicts
