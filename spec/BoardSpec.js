@@ -79,11 +79,16 @@ describe('Board', function () {
     ];
     var board = new Board(matrix);
 
+    it('should find a column conflict', function() {
+      expect(board.hasColConflictAt(0)).to.be.equal(true);
+      expect(board.hasColConflictAt(1)).to.be.equal(false);
+    });
+
     it('should not find a row conflict', function () {
       expect(board.hasAnyRowConflicts()).to.be.equal(false);
     });
 
-    it('should find a col conflict', function () {
+    it('should find any col conflict', function () {
       expect(board.hasAnyColConflicts()).to.be.equal(true);
     });
 

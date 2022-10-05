@@ -97,7 +97,6 @@
       } else {
         return false;
       }
-      // fixme
     },
 
     // test if any rows on this board contain conflicts
@@ -106,13 +105,15 @@
     //C:
     //E:
     hasAnyRowConflicts: function () {
-      var rows = this.attributes;
-      for (var i = 0; i < rows.length; i++) {
-        for (var j = 0; j < row[i].length; j++) {
+      var rows = this.rows();
 
+      for (var i = 0; i < rows.length; i++) {
+        var hasConflict = this.hasRowConflictAt(rows[i]);
+        if (hasConflict === true) {
+          return true;
         }
       }
-      return false; // fixme
+      return false;
     },
 
 
@@ -121,13 +122,52 @@
     // --------------------------------------------------------------
     //
     // test if a specific column on this board contains a conflict
+    // O - Boolean
+    // I - Integer arg representing column index / board matrix
+    // C - NA
+    // E - NA
+
     hasColConflictAt: function (colIndex) {
-      return false; // fixme
+      // Create count var
+      var count = 0;
+      var rows = this.rows();
+      console.log(colIndex);
+
+      // Loop over result of rows method call
+      for (var i = 0; i < rows.length; i++) {
+        // Use colIndex to check specified column for conflicts
+        if (rows[i][colIndex] === 1) {
+          // If 1 found, increment count
+          count++;
+        }
+      }
+      // If count is greater than one, return true
+      if (count > 1) {
+        return true;
+      }
+      // Otherwise return false
+      return false;
     },
 
     // test if any columns on this board contain conflicts
+    // O - boolean
+    // I - No argument inputs / operating on board
+    // C - NA
+    // E - NA
     hasAnyColConflicts: function () {
-      return false; // fixme
+      // Invoke rows method (store in var)
+      var rows = this.rows();
+      var length = rows[0].length;
+      // Loop over rows
+      for (var i = 0; i < length; i++) {
+        // Check each row for column conflicts using hasColConflictAt
+        if (this.hasColConflictAt(i)) {
+          // If conflict found, return true
+          return true;
+        }
+      }
+      // Otherwise return false
+      return false;
     },
 
 
