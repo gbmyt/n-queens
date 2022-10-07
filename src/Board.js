@@ -179,34 +179,6 @@
     // I - integer represent first index operate the matrix board
     // C - no constrains
     // E - start the index far to the right
-    // hasMajorDiagonalConflictAt: function (column) {
-    //   var rows = this.rows()
-    //   var count = 0
-    //   var value = 0
-    //   var column1 = 0
-    //   for (var row = 0; row < rows[0].length; row++) {
-    //     if (rows[row][column] === 1) {
-    //       value = this._getFirstRowColumnIndexForMajorDiagonalOn(row, column);
-    //       for (row1 = 0; row1 < rows[0].length; row1++) {
-    //         column1 = value + row1
-    //         if (this._isInBounds(row1, column1)) {
-    //           if (rows[row1][column1] === 1) {
-    //             count++
-    //             if (count === 2) {
-    //               return true
-    //             }
-    //           }
-    //         }
-    //       }
-    //     }
-    //   }
-
-    //   return false; // fixme
-
-    // },
-    // _getFirstRowColumnIndexForMajorDiagonalOn: function (rowIndex, colIndex) {
-    //   return colIndex - rowIndex;
-    // },
     hasMajorDiagonalConflictAt: function (colIndex) {
       var rows = this.rows();
       var count = 0;
@@ -234,19 +206,6 @@
       }
       return false;
     },
-    // hasAnyMajorDiagonalConflicts: function () {
-    //   var rows = this.rows()
-    //   var res = false
-    //   for (var i = 0; i < rows[0].length; i++) {
-    //     res = this.hasMajorDiagonalConflictAt(i)
-    //     if (res) {
-    //       return res
-    //     }
-
-    //   }
-    //   return res; // fixme
-    // },
-
 
     // test if any major diagonals on this board contain conflicts
     // O - Boolean
@@ -273,10 +232,6 @@
     // --------------------------------------------------------------
     //
     // test if a specific minor diagonal on this board contains a conflict
-
-    // _getFirstRowColumnIndexForMinorDiagonalOn: function (rowIndex, colIndex) {
-    //   return colIndex + rowIndex;
-    // },
     // Pseudocode
     // create rows variable storage this.rows
     // create count
@@ -320,14 +275,12 @@
     // test if any minor diagonals on this board contain conflicts
     hasAnyMinorDiagonalConflicts: function () {
       var rows = this.rows();
-
       for (var i = 0; i < rows.length; i++) {
         if (this.hasMinorDiagonalConflictAt(i)) {
           return true;
         }
       }
       return false;
-
     }
 
     /*--------------------  End of Helper Functions  ---------------------*/
@@ -344,37 +297,3 @@
   };
 
 }());
-
-
-// hasMajorDiagonalConflictAt First Solution Attempt
-// //create count variable
-// var count = 0;
-// var rows = this.rows();
-// var dIndex = majorDiagonalColumnIndexAtFirstRow;
-// //loop over input argument
-// for (var i = 0; i < rows.length; i++) {
-//   console.log(rows[i], dIndex);
-//   console.log(this._isInBounds(rows[i], dIndex));
-
-//   // Returning false, out of bounds
-//   if (this._isInBounds(rows[i], dIndex)) {
-//     //check start index which provided, if it =1==>increment count
-//     //check second row at index+1 see confict
-//     if (rows[i][dIndex] === 1) {
-//       //if that is true count++
-//       count++;
-//       dIndex++;
-//     } else {
-//       throw new Error();
-//     }
-//     //repeat last step
-//   }
-// }
-// if (count > 1) {
-//   return true;
-// }
-
-// //if count >1 return true
-
-// // else return false
-// return false;
