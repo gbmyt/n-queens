@@ -85,6 +85,8 @@
     // test if a specific row on this board contains a conflict
     //pass rowIndex as argument==>need accumulate variable===>check each element if it is one or zero
     //===>if it is one accumalete variable++==>check accu variable ?>1 return true: false
+
+    // Time Complexity: O(n)
     hasRowConflictAt: function (rowIndex) {
       var count = 0;
       for (var i = 0; i < rowIndex.length; i++) {
@@ -104,6 +106,8 @@
     //I:board/matrix
     //C:
     //E:
+
+    // Time Complexity: O(n^2)
     hasAnyRowConflicts: function () {
       var rows = this.rows();
 
@@ -127,6 +131,7 @@
     // C - NA
     // E - NA
 
+    // Time Complexity: O(n)
     hasColConflictAt: function (colIndex) {
       // Create count var
       var count = 0;
@@ -153,10 +158,18 @@
     // I - No argument inputs / operating on board
     // C - NA
     // E - NA
+
+    // Time Complexity: O(n^2)
     hasAnyColConflicts: function () {
       // Invoke rows method (store in var)
       var rows = this.rows();
+
+      if (!rows[0]) {
+        return false;
+      }
+
       var length = rows[0].length;
+
       // Loop over rows
       for (var i = 0; i < length; i++) {
         // Check each row for column conflicts using hasColConflictAt
@@ -179,6 +192,8 @@
     // I - integer represent first index operate the matrix board
     // C - no constrains
     // E - start the index far to the right
+
+    // Time Complexity: O(n^2)
     hasMajorDiagonalConflictAt: function (colIndex) {
       var rows = this.rows();
       var count = 0;
@@ -216,6 +231,8 @@
     // Loop over matrix
     // use our has diag conflict func to check for conflict
     // if found return true otherwise false
+
+    // Time Complexity: O(n^2)
     hasAnyMajorDiagonalConflicts: function () {
       var rows = this.rows();
 
@@ -244,6 +261,8 @@
     //check inbound
     //check current index if it is one ===> count increment
     //check count >1?===> return boolean
+
+    // Time Complexity: O(n^2)
     hasMinorDiagonalConflictAt: function (colIndex) {
       var rows = this.rows();
       var count = 0;
@@ -273,6 +292,7 @@
     },
 
     // test if any minor diagonals on this board contain conflicts
+    // Time Complexity: O(n^2)
     hasAnyMinorDiagonalConflicts: function () {
       var rows = this.rows();
       for (var i = 0; i < rows.length; i++) {

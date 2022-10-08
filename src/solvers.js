@@ -36,9 +36,7 @@
 
 // Return solutionBoard
 
-// var board = new Board({n:5})
-// board.get(3) will return the 3rd row of the instance board (assuming that instance exists)
-// board.set()
+// Time Complexity: O(n^2)
 window.findNRooksSolution = function (n) {
   var solution = new Board({ n: n });
   var board = solution.rows();
@@ -69,6 +67,8 @@ window.findNRooksSolution = function (n) {
 // O - Int representing number of solutions
 // C -
 // E -
+
+// Time Complexity: O(n^2)
 window.countNRooksSolutions = function (n) {
 
   var solutionCount = 0;
@@ -101,72 +101,89 @@ window.countNRooksSolutions = function (n) {
 
 // return a matrix (an array of arrays) representing a single nxn chessboard, with n queens placed such that none of them can attack each other
 
-// _getFirstRowColumnIndexForMajorDiagonalOn: function (rowIndex, colIndex) {
-//   return colIndex - rowIndex;
-// },
-
-// _getFirstRowColumnIndexForMinorDiagonalOn: function (rowIndex, colIndex) {
-//   return colIndex + rowIndex;
-// },
-
-// Solution for Rook, where n = 1
-// {"0":[1],"n":1}
-
-// Solution for Queen, where n = 0
-// {"0":[],"n":0}
-
 // I - Integer representing board size
 // O - Int representing number of solutions
 // C -
 // E - Empty board (n = 0)
-window.findNQueensSolution = function (n) {
-  // var makeEmptyMatrix = function (n) {
-  //   return _(_.range(n)).map(function () {
-  //     return _(_.range(n)).map(function () {
-  //       return 0;
-  //     });
-  //   });
-  // };
 
-  // if (n === 0) {
-  //   // Return an empty board?
-  //   // Having trouble handling n = 0, revisit later (ADD 0 BACK TO SPEC FILE)
-  //   var test = makeEmptyMatrix(n);
-  //   return test;
-  // }
+// Time Complexity: O(n^2)
+window.findNQueensSolution = function (n) {
   var solution = new Board({ n: n });
   var board = solution.rows();
-  // console.log('HERE', solution);
+  if (n === 0) {
+    return board;
+  }
 
   var col = {};
   var majDiag = {};
   var minDiag = {};
+  var stopper = 0;
 
   var bt = function (rowIndex, board) {
     if (rowIndex === n) {
+      stopper++;
       return;
     }
 
     for (var colIndex = 0; colIndex < n; colIndex++) {
-      if (!col[colIndex] && !majDiag[colIndex - rowIndex] && !minDiag[colIndex + rowIndex]) {
+      if ((!col[colIndex]) && (!majDiag[colIndex - rowIndex]) && (!minDiag[colIndex + rowIndex])) {
         board[rowIndex][colIndex] = 1;
         col[colIndex] = true;
         majDiag[colIndex - rowIndex] = true;
         minDiag[colIndex + rowIndex] = true;
         bt(rowIndex + 1, board);
+
+        if (stopper === 1) {
+          return;
+        }
+        // Backtrack
+        board[rowIndex][colIndex] = 0;
+        col[colIndex] = false;
+        majDiag[colIndex - rowIndex] = false;
+        minDiag[colIndex + rowIndex] = false;
       }
     }
   };
   bt(0, board);
-  // console.log('BOARD', board);
 
-  // console.log('Single solution for ' + n + ' queens:', JSON.stringify(solution));
+  console.log('Single solution for ' + n + ' queens:', JSON.stringify(solution));
   return board;
 };
 
 // return the number of nxn chessboards that exist, with n queens placed such that none of them can attack each other
+
+// Time Complexity: O(n^2)
 window.countNQueensSolutions = function (n) {
-  var solutionCount = undefined; //fixme
+  var solutionCount = 0;
+
+  var solution = new Board({ n: n });
+  var board = solution.rows();
+  var col = {};//coloumn confict Hash table
+  var maj = {};//maj confict Hash table
+  var min = {};//min confict Hash table
+
+  var bt = function (rowIndex) {
+    if (rowIndex === n) {
+      solutionCount++;
+      return;
+    }
+
+    for (var colIndex = 0; colIndex < n; colIndex++) {
+      if ((!col[colIndex]) && (!maj[colIndex - rowIndex]) && (!min[colIndex + rowIndex])) {
+        board[rowIndex][colIndex] = 1;
+        col[colIndex] = true;
+        maj[colIndex - rowIndex] = true;
+        min[colIndex + rowIndex] = true;
+        bt(rowIndex + 1);
+
+        col[colIndex] = false;
+        maj[colIndex - rowIndex] = false;
+        min[colIndex + rowIndex] = false;
+        board[rowIndex][colIndex] = 0;
+      }
+    }
+  };
+  bt(0);
 
   console.log('Number of solutions for ' + n + ' queens:', solutionCount);
   return solutionCount;
