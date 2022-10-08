@@ -37,13 +37,51 @@
 // Return solutionBoard
 
 // Time Complexity: O(n^2)
+
+// Advanced Content Attempt
+// findNRooksSolution - Only col[colIndex] (no minor / major), we dont have to reset to 0 / false
+// countNRooksSolutions - reset vars after backtracking
+// findNQueensSolution - stopper logic, account for maj/minor diags
+// countNQueensSolutions - no stopper logic, account for maj/minor diags
+// window.bt = function (rowIndex, func, n) {
+//   if (rowIndex === n) {
+//     stopper++;
+//     return;
+//   }
+
+//   var noConflict = func === 'findNRooksSolution' || func === 'countNRooksSolutions' ? !col[colIndex] : (!col[colIndex]) && (!majDiag[colIndex - rowIndex]) && (!minDiag[colIndex + rowIndex]);
+
+//   for (var colIndex = 0; colIndex < n; colIndex++) {
+//     if (noConflict) {
+//       board[rowIndex][colIndex] = 1;
+//       col[colIndex] = true;
+
+//       majDiag[colIndex - rowIndex] = true;
+//       minDiag[colIndex + rowIndex] = true;
+//       bt(rowIndex + 1, board);
+
+//       if (['findNQueensSolution', 'findNRooksSolution'].includes(func) && stopper === 1) {
+//         return;
+//       }
+//       // Backtrack
+//       board[rowIndex][colIndex] = 0;
+//       col[colIndex] = false;
+
+//       majDiag[colIndex - rowIndex] = false;
+//       minDiag[colIndex + rowIndex] = false;
+//     }
+//   }
+// };
+
 window.findNRooksSolution = function (n) {
   var solution = new Board({ n: n });
   var board = solution.rows();
   var col = {};
+  var stopper = 0;
 
   var bt = function (rowIndex, board) {
     if (rowIndex === n) {
+      stopper++;
       return;
     }
 
@@ -52,6 +90,12 @@ window.findNRooksSolution = function (n) {
         board[rowIndex][colIndex] = 1;
         col[colIndex] = true;
         bt(rowIndex + 1, board);
+        if (stopper === 1) {
+          return;
+        }
+        board[rowIndex][colIndex] = 0;
+        col[colIndex] = false;
+
       }
     }
   };
@@ -119,6 +163,9 @@ window.findNQueensSolution = function (n) {
   var minDiag = {};
   var stopper = 0;
 
+  // Attempt to use global backtrack func
+  // window.bt(0, 'findNQueensSolution', n);
+
   var bt = function (rowIndex, board) {
     if (rowIndex === n) {
       stopper++;
@@ -175,7 +222,6 @@ window.countNQueensSolutions = function (n) {
         maj[colIndex - rowIndex] = true;
         min[colIndex + rowIndex] = true;
         bt(rowIndex + 1);
-
         col[colIndex] = false;
         maj[colIndex - rowIndex] = false;
         min[colIndex + rowIndex] = false;
